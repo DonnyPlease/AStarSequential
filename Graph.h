@@ -1,15 +1,7 @@
+#pragma once
+
 #include <vector>
 #include <queue>
-
-
-// Define the comparator
-template<typename T>
-struct PairComparator {
-    bool operator()(const T& lhs, const T& rhs) const {
-        return lhs.second > rhs.second;
-    }
-};
-
 
 class Graph {
 private:
@@ -19,6 +11,7 @@ private:
 public:
     Graph(int vertices);
 
+public:
     void addEdge(int u, int v, int cost = 0);
     void removeEdge(int u, int v);
     std::vector<std::pair<int, double>> getNeighbors(int vertex);

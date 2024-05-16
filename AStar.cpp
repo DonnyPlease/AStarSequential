@@ -75,3 +75,5 @@ void AStar::run() {
 std::vector<int> AStar::getShortestPath() {
     return shortestPath;
 }
+
+

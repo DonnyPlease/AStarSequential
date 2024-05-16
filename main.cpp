@@ -1,5 +1,5 @@
 #include <Graph.h>
-#include <AStar.cpp>
+#include <AStar.h>
 
 #include <vector>
 #include <iostream>

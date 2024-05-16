@@ -88,3 +88,4 @@ Graph GraphFactory::create2DGridGraph(int rows, int columns) {
     }
     return graph;
 }
+
