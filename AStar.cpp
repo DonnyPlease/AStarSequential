@@ -3,10 +3,12 @@
 #include <limits>
 #include <iostream>
 
-AStar::AStar(Graph graph, int start, int end) :
+AStar::AStar(Graph graph, int start, int end, int numberOfRows, int numberOfColumns) :
         graph(graph),
         startVertex(start),
-        endVertex(end) {
+        endVertex(end),
+        numberOfRows(numberOfRows), 
+        numberOfColumns(numberOfColumns) {
     initializeVariables();
 };
 
@@ -51,11 +53,15 @@ void AStar::exploreAllNeighbors(int currentVertex) {
         if (tentativeGScore < gScore[neighborId]) {
             cameFrom[neighborId] = currentVertex;
             gScore[neighborId] = tentativeGScore;
-            double h = std::max(std::abs(neighborId % 10 - 9), std::abs(neighborId / 10 - 9));
-
+            double h = heuristicFunction(neighborId);
             openSet.push({neighborId, tentativeGScore + h});
         }
     }
+}
+
+int AStar::heuristicFunction(int vertex) {
+    // Chebyshev metric
+    return std::max(std::abs(vertex % 1000 - endVertex % 1000), std::abs(vertex / 1000 - endVertex / 1000));
 }
 
 void AStar::run() {
@@ -68,7 +74,6 @@ void AStar::run() {
         }
         exploreAllNeighbors(currentVertex); 
     }
-    std::cout << "A* has finished.\n";
     return;
 }
 

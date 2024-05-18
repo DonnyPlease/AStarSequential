@@ -8,6 +8,9 @@
 Graph::Graph(int vertices) {
     numberOfVertices = vertices;
     adjacencyLists.resize(numberOfVertices, std::vector<std::pair<int, double>>());
+    for (int i = 0; i < numberOfVertices; i++) {
+        adjacencyLists[i].reserve(10);
+    }
 }
 
 void Graph::addEdge(int vertex1, int vertex2, int cost) {
