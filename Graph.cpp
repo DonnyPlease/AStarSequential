@@ -13,9 +13,19 @@ Graph::Graph(int vertices) {
     }
 }
 
+Graph::Graph() :
+    numberOfVertices(0),
+    adjacencyLists(std::vector<std::vector<std::pair<int,double>>>()) {
+}
+
+Graph::Graph(const Graph &graph) :
+    numberOfVertices(graph.numberOfVertices),
+    adjacencyLists(graph.adjacencyLists) {
+}
+
 void Graph::addEdge(int vertex1, int vertex2, int cost) {
-    adjacencyLists[vertex1].push_back({vertex2, cost}); 
-    adjacencyLists[vertex2].push_back({vertex1, cost}); 
+    adjacencyLists[vertex1].emplace_back(std::pair<int, double>({vertex2, cost})); 
+    adjacencyLists[vertex2].emplace_back(std::pair<int, double>({vertex1, cost})); 
 }
 
 std::vector<std::pair<int, double>> Graph::getNeighbors(int vertex) {

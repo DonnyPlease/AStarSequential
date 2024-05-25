@@ -10,8 +10,11 @@ private:
 public:
     Graph(int vertices);
 
+    Graph();
+    Graph(const Graph& graph);
+
 public:
-    void addEdge(int u, int v, int cost = 0);
+    void addEdge(int u, int v, int cost = 1);
     void removeEdge(int u, int v);
     std::vector<std::pair<int, double>> getNeighbors(int vertex);
     std::vector<std::vector<std::pair<int, double>>> getAdjList();
