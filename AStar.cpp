@@ -2,6 +2,7 @@
 
 #include <limits>
 #include <iostream>
+#include <cmath>
 
 AStar::AStar(Graph graph, int start, int end, int numberOfRows, int numberOfColumns) :
         graph(graph),
@@ -45,9 +46,9 @@ void AStar::exploreAllNeighbors(int currentVertex) {
         int neighborId = neighbor.first;
         double edgeCost = neighbor.second;
 
-        // if (closedSet[neighborId]) { 
-        //     continue; 
-        // }
+        if (closedSet[neighborId]) { 
+             continue; 
+        }
         double tentativeGScore = gScore[currentVertex] + edgeCost;
 
         if (tentativeGScore < gScore[neighborId]) {
@@ -60,8 +61,23 @@ void AStar::exploreAllNeighbors(int currentVertex) {
 }
 
 int AStar::heuristicFunction(int vertex) {
+
+    int vertexRow = vertex / numberOfColumns;
+    int vertexCol = vertex % numberOfColumns;
+    int endRow = endVertex / numberOfColumns;
+    int endCol = endVertex % numberOfColumns;
+
     // Chebyshev metric
-    return std::max(std::abs(vertex % 1000 - endVertex % 1000), std::abs(vertex / 1000 - endVertex / 1000));
+    //return std::max(std::abs(vertexRow - endRow), std::abs(vertexCol - endCol));
+    
+    //euclidean
+    // return std::sqrt(std::pow(vertexRow - endRow, 2) + std::pow(vertexCol - endCol, 2))*9.9;
+
+    // chebyshev adjusted
+    int dx = std::abs(vertexRow - endRow);
+    int dy = std::abs(vertexCol - endCol);
+    
+    return 10 * (dx + dy) + (14 - 2 * 10) * std::min(dx, dy);
 }
 
 void AStar::run() {

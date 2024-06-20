@@ -16,6 +16,7 @@ public:
 public:
     void addEdge(int u, int v, int cost = 1);
     void removeEdge(int u, int v);
+    void removeVertex(int u);
     std::vector<std::pair<int, double>> getNeighbors(int vertex);
     std::vector<std::vector<std::pair<int, double>>> getAdjList();
     int getNumberOfVertices();

@@ -69,6 +69,17 @@ void Graph::removeEdge(int u, int v) {
     }
 }
 
+void Graph::removeVertex(int u) {
+    // create copy of neighbors vector
+    std::vector<int> neighbors;
+    for (auto edge : adjacencyLists[u]) {
+        neighbors.push_back(edge.first);
+    }
+    for (auto n : neighbors) {
+        removeEdge(u, n);
+    }
+}
+
 Graph GraphFactory::createFullyConnectedGraph(int vertices) {
     Graph graph(vertices);
     for (int i = 0; i < vertices; i++) {

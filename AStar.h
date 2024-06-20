@@ -8,7 +8,7 @@
 template<typename T>
 struct PairComparator {
     bool operator()(const T& lhs, const T& rhs) const {
-        return lhs.first > rhs.first;
+        return lhs.second > rhs.second;
     }
 };
 
